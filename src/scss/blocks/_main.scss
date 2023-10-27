@@ -1,0 +1,23 @@
+.main {
+  position: relative;
+  flex-grow: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 20rem;
+    width: 68rem;
+    background-image: url(../img/decor-left-bottom.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: 768px) {
+  .main::before {
+    height: 15rem;
+    width: 50rem;
+  }
+}

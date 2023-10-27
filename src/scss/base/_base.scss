@@ -1,0 +1,244 @@
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--page-bg);
+  color: var(--text-color);
+  font-family: var(--font-main);
+  font-size: 2rem;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1 0 auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 25rem;
+    width: 70rem;
+    background-image: url(../img/decor-left-top.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 15rem;
+    width: 33rem;
+    background-image: url(../img/decor-right-top.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+  height: 5rem;
+  min-width: 18rem;
+  margin: 1rem 0;
+  padding: 1.5rem;
+  font-weight: 600;
+  color: var(--unactive-text);
+  border-radius: 1rem;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    var(--unactive-light-bg) 0%,
+    var(--unactive-bg) 100%
+  );
+  letter-spacing: 0.01rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.5s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &--light {
+    position: relative;
+    display: block;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.7rem 3rem;
+    height: 5.5rem;
+    color: var(--light);
+    font-weight: 700;
+    background: var(--accent-light);
+    opacity: 1;
+    overflow: hidden;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -20rem;
+      width: 6rem;
+      height: 10rem;
+      background-color: var(--light);
+      filter: blur(30px);
+      transform: skewX(30deg) translateZ(0);
+      transition: 1s;
+      animation-name: slideme;
+      animation-duration: 3s;
+      animation-delay: 0.05s;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  &--green {
+    background: linear-gradient(135deg, #a3eac3 0%, #08b857 100%);
+    color: var(--light);
+  }
+
+  &--red {
+    background: linear-gradient(135deg, #f17e80 0%, #e64144 100%);
+    color: var(--light);
+  }
+
+  &--active {
+    color: var(--light);
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-dark) 100%
+    );
+
+    .icon--bike {
+      background-image: url(../img/svg/bike-active.svg);
+    }
+
+    .icon--car {
+      background-image: url(../img/svg/car-active.svg);
+    }
+
+    .icon--rocket {
+      background-image: url(../img/svg/rocket-active.svg);
+    }
+
+    .icon--sound-on {
+      background-image: url(../img/svg/sound-on-active.svg);
+    }
+
+    .icon--sound-off {
+      background-image: url(../img/svg/sound-off-active.svg);
+    }
+  }
+
+  &:active {
+    transform: translateY(-3%);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
+  }
+}
+
+.icon {
+  display: inline-block;
+  width: 3.3rem;
+  height: 3.3rem;
+  background-size: 3rem;
+  background-repeat: no-repeat;
+}
+
+.icon--bike {
+  background-image: url(../img/svg/bike-unactive.svg);
+}
+
+.icon--car {
+  background-image: url(../img/svg/car-unactive.svg);
+}
+
+.icon--rocket {
+  background-image: url(../img/svg/rocket-unactive.svg);
+}
+
+.icon--sound-on {
+  background-image: url(../img/svg/sound-on-unactive.svg);
+  background-size: 3.1rem;
+}
+
+.icon--sound-off {
+  background-image: url(../img/svg/sound-off-unactive.svg);
+  background-size: 3.1rem;
+}
+
+.icon--smile {
+  background-image: url(../img/svg/smile.svg);
+}
+
+.icon--sad {
+  background-image: url(../img/svg/sad.svg);
+}
+
+@keyframes slideme {
+  0% {
+    left: -30px;
+    margin-left: 0px;
+  }
+  30% {
+    left: 110%;
+    margin-left: 80px;
+  }
+  100% {
+    left: 110%;
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 1200px) {
+  html,
+  body {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 992px) {
+  html,
+  body {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper::before {
+    height: 20rem;
+    width: 56rem;
+  }
+
+  .wrapper::after {
+    display: none;
+  }
+
+  .button {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  html,
+  body {
+    font-size: 6.2px;
+  }
+}

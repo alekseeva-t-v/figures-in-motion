@@ -58,7 +58,7 @@ export const VICTORY = [
   {
     src1: './img/svg/victory-05.svg',
     src2: './img/svg/victory-light-05.svg',
-    text: 'Ты настоящий мур-гений! Я в тебе нисколько не сомневался!'
+    text: 'Ты настоящий мур-гений! Я в тебе нисколько не сомневалась!'
   },
   {
     src1: './img/svg/victory-06.svg',
@@ -83,7 +83,7 @@ export const VICTORY = [
   {
     src1: './img/svg/victory-10.svg',
     src2: './img/svg/victory-light-10.svg',
-    text: 'Поздравляю с отличным результатом в испытании! Сердечно рад!'
+    text: 'Поздравляю с отличным результатом в испытании! Сердечно рада!'
   },
   {
     src1: './img/svg/victory-11.svg',
@@ -113,7 +113,7 @@ export const VICTORY = [
   {
     src1: './img/svg/victory-16.svg',
     src2: './img/svg/victory-light-16.svg',
-    text: 'Мур-рр! Твоя смекалка и находчивость достойны похвалы! Готов поделиться рыбкой!'
+    text: 'Мур-рр! Твоя смекалка и находчивость достойны похвалы! Готова поделиться рыбкой!'
   },
   {
     src1: './img/svg/victory-17.svg',

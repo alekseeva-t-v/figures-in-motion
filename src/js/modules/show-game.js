@@ -54,11 +54,8 @@ function showGame() {
    * @param {number} exception число, которое необходимо исключить из диапазона.
    * @return {number} рандомное число.
    */
-  function getRandomNumber(min, max, exception = -1) {
+  function getRandomNumber(min, max) {
     const randomNumber = Math.round(Math.random() * (max - min) + min);
-    if (randomNumber === exception) {
-      return randomNumber + 1 < max ? randomNumber + 1 : randomNumber - 1;
-    }
     return randomNumber;
   }
 
@@ -76,8 +73,8 @@ function showGame() {
         if (param === 'speed') speed = Number(buttonClick.dataset[param]);
         if (param === 'sound') sound = Number(buttonClick.dataset[param]);
 
-        console.log('speed', speed)
-        console.log('sound', sound)
+        console.log('speed', speed);
+        console.log('sound', sound);
 
         const buttons = parentElement.querySelectorAll('.button');
 
@@ -90,7 +87,7 @@ function showGame() {
     });
   }
 
-   /**
+  /**
    * Отображает новые фигуры, если игра не закончена
    *
    */
@@ -103,29 +100,35 @@ function showGame() {
         item.innerHTML = '';
       });
 
-      const gameBoardItemsArr = Array.from(gameBoardItemsList)
+      const gameBoardItemsArr = Array.from(gameBoardItemsList);
 
       const firstItem = gameBoardItemsArr[0];
       const secondItem = gameBoardItemsArr[1];
 
-      const indexFirstFigure = getRandomNumber(0, FIGURES.length);
-      const indexSecondFigure = getRandomNumber(0, FIGURES.length, indexFirstFigure);
-      const indexColorFirstFigure = getRandomNumber(0, COLORS.length);
-      const indexColorSecondFigure = getRandomNumber(0, COLORS.length, indexColorFirstFigure);
+      const indexFirstFigure = getRandomNumber(0, FIGURES.length - 1);
+      const newFiguresArr = FIGURES.toSpliced(indexFirstFigure, 1);
+      const indexSecondFigure = getRandomNumber(0, newFiguresArr.length - 1);
 
-      firstItem.innerHTML = FIGURES[indexFirstFigure];
-      secondItem.innerHTML = FIGURES[indexSecondFigure];
+      const indexColorFirstFigure = getRandomNumber(0, COLORS.length - 1);
+      const newColorsArr = COLORS.toSpliced(indexColorFirstFigure, 1);
+      const indexColorSecondFigure = getRandomNumber(0, newColorsArr.length - 1);
 
-      const firstSvg = firstItem.querySelector('svg');
-      const secondSvg = secondItem.querySelector('svg');
+      const firstFigure = FIGURES[indexFirstFigure];
+      const secondFigure = newFiguresArr[indexSecondFigure];
 
-      firstSvg.style.stroke = COLORS[indexColorFirstFigure];
-      secondSvg.style.stroke = COLORS[indexColorSecondFigure];
+      if (firstFigure && secondFigure) {
+        firstItem.innerHTML = firstFigure;
+        secondItem.innerHTML = secondFigure;
 
-      if (firstSvg && secondSvg && firstSvg.style.stroke && secondSvg.style.stroke) {
-        const newWordAudio = new Audio();
-        newWordAudio.src = './files/new.mp3';
-        sound && newWordAudio.play();
+        const firstSvg = firstItem.querySelector('svg');
+        const secondSvg = secondItem.querySelector('svg');
+
+        firstSvg.style.stroke = COLORS[indexColorFirstFigure];
+        secondSvg.style.stroke = newColorsArr[indexColorSecondFigure];
+
+        const newFigurAudio = new Audio();
+        newFigurAudio.src = './files/new.mp3';
+        sound && newFigurAudio.play();
 
         countFigures--;
       }
@@ -278,7 +281,7 @@ function showGame() {
    * @return {string} разметка экрана с результатом.
    */
   function createResScreen() {
-    const { src1, text } = isVictory
+    const { src2, text } = isVictory
       ? VICTORY[getRandomNumber(0, VICTORY.length - 1)]
       : DEFEAT[getRandomNumber(0, DEFEAT.length - 1)];
     const markup = `
@@ -286,12 +289,12 @@ function showGame() {
       <div class="game__descr">
         <h2 class="game__title">${text}</h2>
         <div class="game__img--mobile">
-          <img src=${src1} alt="Котик" />
+          <img src=${src2} alt="Котик" />
         </div>
         <button class="game__button button button--light" id="new-game-btn">Играть снова</button>
       </div>
       <div class="game__img">
-        <img src=${src1} alt="Котик" />
+        <img src=${src2} alt="Котик" />
       </div>
     </div>
     `;
@@ -363,6 +366,7 @@ function showGame() {
    */
   function addFunctionaliatyGameScreen() {
     if (document.getElementById('board')) {
+      showFigures();
       timerId = setInterval(showFigures, speed);
     }
   }

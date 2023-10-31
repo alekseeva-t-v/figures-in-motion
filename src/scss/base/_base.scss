@@ -214,14 +214,26 @@ body {
   }
 }
 
-@media (max-width: 992px) {
+@media (orientation: landscape) and (max-width: 992px) {
   html,
   body {
     font-size: 7px;
   }
 }
 
+@media (orientation: portrait) and (max-width: 992px) {
+  html,
+  body {
+    font-size: 9px;
+  }
+}
+
 @media (max-width: 768px) {
+  html,
+  body {
+    font-size: 7px;
+  }
+
   .wrapper::before {
     height: 20rem;
     width: 56rem;
